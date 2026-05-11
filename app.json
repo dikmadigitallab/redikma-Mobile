@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "webview-camera-app",
-    "slug": "webview-camera-app",
-    "version": "1.0.0",
+    "name": "ReDikma",
+    "slug": "redikma",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -13,17 +13,32 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Esta aplicação precisa de acesso à câmera para tirar fotos.",
+        "NSPhotoLibraryUsageDescription": "Esta aplicação precisa de acesso à galeria para enviar fotos."
+      }
     },
     "android": {
+      "package": "br.com.dikmadigital.redikma",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "608838e5-1de2-4842-bda9-0fd7fd96f495"
+      }
     }
   }
 }
