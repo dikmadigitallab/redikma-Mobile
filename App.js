@@ -101,7 +101,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar style="light" />
+      <StatusBar hidden />
 
       <View style={styles.header}>
         <Image source={require('./assets/icon.png')} style={styles.headerIcon} />
