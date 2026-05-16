@@ -104,8 +104,8 @@ export default function App() {
       <StatusBar hidden />
 
       <View style={styles.header}>
-        <Image source={require('./assets/icon.png')} style={styles.headerIcon} />
-        <Text style={styles.headerTitle}>Redikma</Text>
+       {/*  <Image source={require('./assets/icon.png')} style={styles.headerIcon} /> */}
+      {/*   <Text style={styles.headerTitle}>Redikma</Text> */}
       </View>
 
       <View style={styles.content}>
