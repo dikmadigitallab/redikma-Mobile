@@ -4,7 +4,7 @@ import { WebView } from 'react-native-webview';
 import { Camera } from 'expo-camera';
 import { StatusBar } from 'expo-status-bar';
 
-const WEBAPP_URL = 'https://redikma-git-oscar-dikmadigitals-projects.vercel.app/login';
+const WEBAPP_URL = 'redikma-git-opencode-dikmadigitals-projects.vercel.app';
 const LOAD_TIMEOUT_MS = 15000;
 
 const COLORS = {
@@ -191,8 +191,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: COLORS.primaryDark,
-    paddingHorizontal: 16,
-    paddingVertical: Platform.OS === 'android' ? 12 : 10,
+    paddingHorizontal:100,
+    paddingVertical: Platform.OS === 'android' ? 24 : 16,
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(255,255,255,0.1)',
   },
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   footer: {
-    height: Platform.OS === 'ios' ? 4 : 6,
+    height: Platform.OS === 'ios' ? 18 :30,
     backgroundColor: COLORS.primaryDark,
   },
 });
