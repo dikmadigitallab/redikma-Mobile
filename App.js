@@ -4,7 +4,11 @@ import { WebView } from 'react-native-webview';
 import { Camera } from 'expo-camera';
 import { StatusBar } from 'expo-status-bar';
 
-const WEBAPP_URL = 'redikma-git-opencode-dikmadigitals-projects.vercel.app';
+//const WEBAPP_URL = 'https://redikma.vercel.app/'; //produção
+//const WEBAPP_URL = 'redikma-git-hml-dikmadigitals-projects.vercel.app'//homologaçao
+const WEBAPP_URL = 'redikma-git-oscar-dikmadigitals-projects.vercel.app' //versão dev
+
+
 const LOAD_TIMEOUT_MS = 15000;
 
 const COLORS = {
