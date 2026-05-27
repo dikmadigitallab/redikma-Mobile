@@ -103,10 +103,10 @@ export default function App() {
     return renderPermissionScreen('Solicitando permissões necessárias...');
   }
 
-  if (hasPermission === false) {
+  if (hasPermission === false || hasMicPermission === false) {
     return renderPermissionScreen(
-      'Permissão da câmera negada',
-      'Acesse as configurações do dispositivo para permitir o acesso à câmera.'
+      'Permissões necessárias negadas',
+      'Acesse as configurações do dispositivo para permitir o acesso à câmera e ao microfone.'
     );
   }
 
@@ -160,9 +160,9 @@ export default function App() {
             onError={handleError}
             onLoadEnd={handleLoadEnd}
             onContentProcessDidTerminate={handleContentProcessDidTerminate}
-            onPermissionRequest={(request) => {
-              request.grant(request.resources);
-            }}
+            allowsInlineMediaPlayback={true}
+            mediaCapturePermissionGrantType="grant"
+            webviewDebuggingEnabled={true}
           />
         )}
       </View>
