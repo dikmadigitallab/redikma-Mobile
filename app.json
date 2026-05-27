@@ -16,7 +16,8 @@
       "supportsTablet": true,
       "infoPlist": {
         "NSCameraUsageDescription": "Esta aplicação precisa de acesso à câmera para tirar fotos.",
-        "NSPhotoLibraryUsageDescription": "Esta aplicação precisa de acesso à galeria para enviar fotos."
+        "NSPhotoLibraryUsageDescription": "Esta aplicação precisa de acesso à galeria para enviar fotos.",
+        "NSMicrophoneUsageDescription": "Esta aplicação precisa de acesso ao microfone para gravar vídeos."
       }
     },
     "android": {
@@ -28,6 +29,7 @@
       "edgeToEdgeEnabled": true,
       "permissions": [
         "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE"
       ]

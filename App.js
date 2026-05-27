@@ -4,9 +4,9 @@ import { WebView } from 'react-native-webview';
 import { Camera } from 'expo-camera';
 import { StatusBar } from 'expo-status-bar';
 
-//const WEBAPP_URL = 'https://redikma.vercel.app/'; //produção
-//const WEBAPP_URL = 'redikma-git-hml-dikmadigitals-projects.vercel.app'//homologaçao
-const WEBAPP_URL = 'redikma-git-oscar-dikmadigitals-projects.vercel.app' //versão dev
+const WEBAPP_URL = 'https://redikma-dev.dikmadigital.com.br/'; //produção
+//const WEBAPP_URL = 'https://redikma-hml.dikmadigital.com.br/'//homologaçao
+//const WEBAPP_URL = 'https://redikma-dev.dikmadigital.com.br/' //versão dev
 
 
 const LOAD_TIMEOUT_MS = 15000;
@@ -24,6 +24,7 @@ const COLORS = {
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState(null);
+  const [hasMicPermission, setHasMicPermission] = useState(null);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [loadTimedOut, setLoadTimedOut] = useState(false);
@@ -37,6 +38,12 @@ export default function App() {
         setHasPermission(status === 'granted');
       } catch {
         setHasPermission(false);
+      }
+      try {
+        const { status } = await Camera.requestMicrophonePermissionsAsync();
+        setHasMicPermission(status === 'granted');
+      } catch {
+        setHasMicPermission(false);
       }
     })();
   }, []);
@@ -83,7 +90,7 @@ export default function App() {
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style="light" />
       <View style={styles.centeredContent}>
-        {message === 'Solicitando permissão da câmera...' ? (
+        {message === 'Solicitando permissões necessárias...' ? (
           <ActivityIndicator size="large" color={COLORS.primaryDark} />
         ) : null}
         <Text style={styles.permissionTitle}>{message}</Text>
@@ -92,8 +99,8 @@ export default function App() {
     </SafeAreaView>
   );
 
-  if (hasPermission === null) {
-    return renderPermissionScreen('Solicitando permissão da câmera...');
+  if (hasPermission === null || hasMicPermission === null) {
+    return renderPermissionScreen('Solicitando permissões necessárias...');
   }
 
   if (hasPermission === false) {
