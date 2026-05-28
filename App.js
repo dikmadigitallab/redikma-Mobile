@@ -4,9 +4,10 @@ import { WebView } from 'react-native-webview';
 import { Camera } from 'expo-camera';
 import { StatusBar } from 'expo-status-bar';
 
-const WEBAPP_URL = 'https://redikma-dev.dikmadigital.com.br/'; //produção
+//const WEBAPP_URL = 'https://redikma-dev.dikmadigital.com.br/'; //produção
 //const WEBAPP_URL = 'https://redikma-hml.dikmadigital.com.br/'//homologaçao
 //const WEBAPP_URL = 'https://redikma-dev.dikmadigital.com.br/' //versão dev
+const WEBAPP_URL = 'https://redikma-git-opencode-dikmadigitals-projects.vercel.app';
 
 
 const LOAD_TIMEOUT_MS = 15000;
@@ -163,6 +164,11 @@ export default function App() {
             allowsInlineMediaPlayback={true}
             mediaCapturePermissionGrantType="grant"
             webviewDebuggingEnabled={true}
+            onPermissionRequest={(request) => {
+              if (Platform.OS === 'android') {
+                request.grant(request.permissions);
+              }
+            }}
           />
         )}
       </View>
