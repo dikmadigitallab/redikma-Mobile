@@ -27,15 +27,17 @@ const WEBAPP_URL =
 const LOAD_TIMEOUT_MS = 15000;
 
 const COLORS = {
-  primaryDark: '#0A4554',
-  secondary: '#4FC3D9',
+  primaryDark: '#272662',
+  secondary: '#86B0DD',
+  accent: '#F15A24',
+
   white: '#FFFFFF',
-  black: '#1A1A1A',
-  gray: '#757575',
-  background: '#F5F5F5',
-  border: '#E0E0E0',
-  accent: '#FDE205',
-};
+  black: '#272662',
+  gray: '#5C5A7A',
+
+  background: '#F7ECDA',
+  border: '#272662',
+} as const;
 
 function MainApp() {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
@@ -159,6 +161,7 @@ function MainApp() {
       <View style={styles.header}>
         {/* <Image source={require('./assets/icon.png')} style={styles.headerIcon} /> */}
         {/* <Text style={styles.headerTitle}>Redikma</Text> */}
+        
       </View>
 
       <View style={styles.content}>
@@ -251,40 +254,41 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.background,
     paddingHorizontal: 24,
   },
 
   permissionTitle: {
     marginTop: 16,
-    fontSize: 18,
-    fontWeight: '600',
-    color: COLORS.black,
+    fontSize: 20,
+    fontWeight: '700',
+    color: COLORS.primaryDark,
     textAlign: 'center',
   },
 
   permissionSubtitle: {
-    marginTop: 8,
+    marginTop: 10,
     fontSize: 14,
     color: COLORS.gray,
     textAlign: 'center',
-    lineHeight: 20,
+    lineHeight: 22,
   },
 
   header: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: COLORS.primaryDark,
-    paddingHorizontal: 100,
-    paddingVertical: Platform.OS === 'android' ? 24 : 16,
+    paddingHorizontal: 24,
+    paddingVertical: Platform.OS === 'android' ? 6 : 16,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255,255,255,0.1)',
+    borderBottomColor: COLORS.border,
   },
 
   headerIcon: {
     width: 28,
     height: 28,
-    borderRadius: 6,
+    borderRadius: 8,
     marginRight: 10,
   },
 
@@ -292,7 +296,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     color: COLORS.white,
-    letterSpacing: 0.5,
+    letterSpacing: 0.3,
   },
 
   content: {
@@ -302,6 +306,7 @@ const styles = StyleSheet.create({
 
   webview: {
     flex: 1,
+    backgroundColor: COLORS.background,
   },
 
   loadingContainer: {
@@ -314,7 +319,8 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 16,
     fontSize: 15,
-    color: COLORS.gray,
+    fontWeight: '500',
+    color: COLORS.primaryDark,
   },
 
   errorContainer: {
@@ -322,50 +328,59 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: COLORS.background,
+    paddingHorizontal: 24,
   },
 
   errorCard: {
+    width: '100%',
+    maxWidth: 340,
     alignItems: 'center',
-    paddingHorizontal: 40,
+    backgroundColor: COLORS.white,
+    borderRadius: 18,
+    paddingVertical: 32,
+    paddingHorizontal: 28,
+    borderWidth: 1,
+    borderColor: COLORS.border,
   },
 
   errorIcon: {
-    fontSize: 56,
-    marginBottom: 20,
+    fontSize: 52,
+    marginBottom: 18,
   },
 
   errorTitle: {
     fontSize: 22,
     fontWeight: '700',
-    color: COLORS.black,
+    color: COLORS.primaryDark,
     marginBottom: 10,
+    textAlign: 'center',
   },
 
   errorDescription: {
     fontSize: 15,
     color: COLORS.gray,
     textAlign: 'center',
-    lineHeight: 22,
+    lineHeight: 24,
     marginBottom: 28,
   },
 
   retryButton: {
-    backgroundColor: COLORS.primaryDark,
+    backgroundColor: COLORS.accent,
     paddingHorizontal: 32,
     paddingVertical: 14,
-    borderRadius: 10,
-    minWidth: 200,
+    borderRadius: 12,
+    minWidth: 220,
     alignItems: 'center',
   },
 
   retryText: {
-    color: COLORS.white,
+    color: COLORS.primaryDark,
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '700',
   },
 
   footer: {
-    height: Platform.OS === 'ios' ? 18 : 30,
+    height: Platform.OS === 'ios' ? 14 : 22,
     backgroundColor: COLORS.primaryDark,
   },
 });
