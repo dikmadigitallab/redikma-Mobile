@@ -1,5 +1,20 @@
 # Checkpoints
 
+## [28-05-2026] - Migração completa para TypeScript
+
+### Problema
+O projeto estava híbrido: `App.tsx` já era TypeScript, mas `index.js` ainda era JavaScript, e o `tsconfig.json` usava `module: "nodenext"` incompatível com o bundler Metro do Expo.
+
+### Alterações Realizadas
+1. **index.js → index.ts**: Convertido entry point para TypeScript
+2. **package.json**: `main` atualizado de `index.js` para `index.ts`
+3. **tsconfig.json**: `module` alterado de `nodenext` para `esnext`, adicionado `moduleResolution: "bundler"`
+4. **App.tsx**: Tipos adicionados — `useState<boolean | null>`, `useRef<WebView>`, `useRef<ReturnType<typeof setTimeout>>`, parâmetros de função tipados
+5. **App.tsx**: Removido prop `onPermissionRequest` (não existe nos tipos do WebView 13.15.0, conforme documentado na memória)
+
+### Build
+- TypeScript: OK (sem erros)
+
 ## [27-05-2026] - Correção de permissões câmera/microfone no WebView
 
 ### Problema

@@ -10,9 +10,14 @@ Aplicativo React Native (Expo 54) que funciona como wrapper WebView para a plata
 - expo-camera ~17.0.10
 
 ## Estrutura
-- `App.js` - Componente principal com WebView + permissões
-- `index.js` - Entry point
+- `App.tsx` - Componente principal com WebView + permissões
+- `index.ts` - Entry point
 - `app.json` - Configuração Expo com permissões nativas
+
+## TypeScript
+- Projeto 100% TypeScript desde 28-05-2026
+- `tsconfig.json` com `strict`, `module: "esnext"`, `moduleResolution: "bundler"`
+- Entry point `index.ts` com `package.json` `main` atualizado
 
 ## Aprendizados
 
