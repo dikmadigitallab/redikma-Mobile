@@ -17,12 +17,10 @@ import { WebView } from 'react-native-webview';
 import { Camera } from 'expo-camera';
 import { StatusBar } from 'expo-status-bar';
 
-// const WEBAPP_URL = 'https://redikma-dev.dikmadigital.com.br/'; // produção
-// const WEBAPP_URL = 'https://redikma-hml.dikmadigital.com.br/'; // homologação
+ //const WEBAPP_URL = 'https://redikma-dev.dikmadigital.com.br/'; // produção
+const WEBAPP_URL = 'https://redikma-hml.dikmadigital.com.br/'; // homologação
 // const WEBAPP_URL = 'https://redikma-dev.dikmadigital.com.br/'; // versão dev
-
-const WEBAPP_URL =
-  'https://redikma-git-opencode-dikmadigitals-projects.vercel.app';
+//const WEBAPP_URL ='https://redikma-git-opencode-dikmadigitals-projects.vercel.app';
 
 const LOAD_TIMEOUT_MS = 15000;
 
@@ -122,7 +120,7 @@ function MainApp() {
       <View style={styles.centeredContent}>
         {message === 'Solicitando permissões necessárias...' && (
           <ActivityIndicator
-            size="large"
+            size="small"
             color={COLORS.primaryDark}
           />
         )}
@@ -307,6 +305,7 @@ const styles = StyleSheet.create({
   webview: {
     flex: 1,
     backgroundColor: COLORS.background,
+    
   },
 
   loadingContainer: {

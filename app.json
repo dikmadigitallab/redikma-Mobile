@@ -7,16 +7,13 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-
     "ios": {
       "supportsTablet": true,
-
       "infoPlist": {
         "NSCameraUsageDescription": "Esta aplicação precisa de acesso à câmera para tirar fotos e gravar vídeos.",
         "NSPhotoLibraryUsageDescription": "Esta aplicação precisa de acesso à galeria para enviar fotos e vídeos.",
@@ -25,47 +22,33 @@
         "NSFaceIDUsageDescription": "Esta aplicação pode utilizar autenticação biométrica para login seguro."
       }
     },
-
     "android": {
       "package": "br.com.dikmadigital.redikma",
-
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-
       "edgeToEdgeEnabled": true,
-
       "permissions": [
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO",
-
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
-
         "android.permission.READ_MEDIA_IMAGES",
         "android.permission.READ_MEDIA_VIDEO",
         "android.permission.READ_MEDIA_AUDIO",
-
         "android.permission.MODIFY_AUDIO_SETTINGS",
-
         "android.permission.INTERNET",
         "android.permission.ACCESS_NETWORK_STATE",
-
         "android.permission.VIBRATE",
-
         "android.permission.WAKE_LOCK",
-
         "android.permission.FOREGROUND_SERVICE",
-
         "android.permission.POST_NOTIFICATIONS"
       ]
     },
-
     "web": {
       "favicon": "./assets/favicon.png"
     },
-
     "plugins": [
       [
         "expo-camera",
@@ -75,10 +58,9 @@
         }
       ]
     ],
-
     "extra": {
       "eas": {
-        "projectId": "608838e5-1de2-4842-bda9-0fd7fd96f495"
+        "projectId": "5f7f415b-66fb-4fc4-aee7-cfe07c919264"
       }
     }
   }
