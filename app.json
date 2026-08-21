@@ -24,6 +24,7 @@
     },
     "android": {
       "package": "br.com.dikmadigital.redikma",
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -55,6 +56,14 @@
         {
           "cameraPermission": "Esta aplicação precisa de acesso à câmera para tirar fotos e gravar vídeos.",
           "microphonePermission": "Esta aplicação precisa de acesso ao microfone para gravação de vídeos e áudios."
+        }
+      ],
+      "@react-native-firebase/app",
+      [
+        "expo-notifications",
+        {
+          "color": "#272662",
+          "defaultChannel": "redikma-lembretes"
         }
       ]
     ],

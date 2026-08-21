@@ -1,0 +1,49 @@
+# Arquivos enviados ao EAS Build.
+# Este arquivo SUBSTITUI o .gitignore no upload do EAS.
+# Diferença proposital: google-services.json NÃO é ignorado aqui
+# (o build precisa dele), mas continua ignorado pelo git.
+
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files (NUNCA enviar segredos ao build)
+.env*.local
+.env
+
+# Configuração local do OpenCode
+.opencode/
+opencode.json
+
+# typescript
+*.tsbuildinfo
+
+# generated native folders
+/ios
+/android

@@ -18,6 +18,11 @@ import { WebView } from 'react-native-webview';
 import { Camera } from 'expo-camera';
 import { StatusBar } from 'expo-status-bar';
 
+import {
+  configureForegroundBehavior,
+  scheduleReengagementNotification,
+} from './src/services/localNotifications';
+
  //const WEBAPP_URL = 'https://redikma-dev.dikmadigital.com.br/'; // produção
 const WEBAPP_URL = 'https://redikma-hml.dikmadigital.com.br/'; // homologação
 // const WEBAPP_URL = 'https://redikma-dev.dikmadigital.com.br/'; // versão dev
@@ -77,6 +82,13 @@ function MainApp() {
         setHasMicPermission(false);
       }
     })();
+  }, []);
+
+  useEffect(() => {
+    // Notificações locais (Etapa 1): re-agenda lembrete de reengajamento
+    // a cada abertura. Falha silenciosa, nunca bloqueia o app.
+    configureForegroundBehavior();
+    void scheduleReengagementNotification();
   }, []);
 
   useEffect(() => {

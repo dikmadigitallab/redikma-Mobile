@@ -33,6 +33,26 @@ Aplicativo React Native (Expo 54) que funciona como wrapper WebView para a plata
 - O prop `onPermissionRequest` está definido nos tipos TypeScript mas **não é implementado** no código nativo Android
 - Permissões de mídia são tratadas exclusivamente pelo `RNCWebChromeClient` no lado Java
 
+## Push Notifications — Etapa 1: NOTIFICAÇÕES LOCAIS (20-08-2026) — autoria: VIBECODE
+- **Decisão do usuário**: Etapa 1 usa notificações LOCAIS nativas (mensagens fixas no app, sem servidor). Firebase fica INSTALADO e configurado, porém INATIVO em runtime, para a fase 2.
+- **Implementação local** (`src/services/localNotifications.ts`):
+  - `expo-notifications` (SDK 54) + plugin no app.json (cor #272662, canal `redikma-lembretes`)
+  - Estratégia de reengajamento: a cada abertura, cancela pendentes e re-agenda lembrete para daqui `INACTIVITY_DAYS` (3) dias → só quem ficar inativo recebe; quem usa o app nunca é incomodado
+  - 4 mensagens fixas PT-BR, escolha aleatória
+  - Handler foreground silencioso (banner suprimido com app aberto)
+  - Falha silenciosa sempre: push nunca bloqueia o app
+  - `App.tsx`: useEffect chama configureForegroundBehavior + scheduleReengagementNotification
+- **Firebase em espera** (para fase 2): libs `@react-native-firebase/app`+`messaging` v26.3.1 instaladas, plugin `@react-native-firebase/app` no app.json, google-services.json na raiz (projeto `redikma-ff4bb`), serviço pronto em `src/services/pushNotifications.ts`. DESATIVADO em runtime: index.ts revertido e App.tsx não chama mais initializePush.
+- **Reativar Firebase (fase 2)**: importar setupBackgroundHandler no index.ts + chamar initializePush/handlers no App.tsx (ver seção API v26 abaixo).
+- **API RNFB v26**: modular (`getMessaging()`, `getToken(messaging)`...) — NÃO tem default export. Guard `getFirebaseMessaging()` retorna null se nativo indisponível.
+- **Para testar etapa 1**: build nativo novo necessário (`expo run:android` ou EAS). Atalho de teste: reduzir INACTIVITY_DAYS/seconds temporariamente. Expo Go não suporta agendamento confiável.
+- **Correções de build EAS (21-08-2026)**:
+  - Conta EAS ativa da máquina: `oskharm12` — projeto `5f7f415b...` pertence a ela (pendência do projectId RESOLVIDA; conta hiskra foi deslogada)
+  - `expo-dev-client` instalado (exigido pelo profile development)
+  - Primeiro build falhou no Prebuild: plugin RNFB exige `"googleServicesFile"` no app.json → adicionado `"./google-services.json"`
+  - Criado `.easignore`: substitui .gitignore no upload EAS; inclui google-services.json (build precisa), mantém .env de fora
+  - expo doctor aponta: remover @types/react-native; expo 54.0.34→~54.0.37 (pendências menores)
+
 ## Endurecimento de Segurança do WebView (20-08-2026) — autoria: VIBECODE
 - **Contexto**: app é wrapper puro de WebView para plataforma Next.js (login obrigatório, só autores autorizados postam). Auditoria identificou superfície de ataque desnecessária.
 - **Mudanças em `App.tsx`**:
