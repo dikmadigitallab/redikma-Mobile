@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   Platform,
+  Linking,
 } from 'react-native';
 
 import {
@@ -23,6 +24,15 @@ const WEBAPP_URL = 'https://redikma-hml.dikmadigital.com.br/'; // homologação
 //const WEBAPP_URL ='https://redikma-git-opencode-dikmadigitals-projects.vercel.app';
 
 const LOAD_TIMEOUT_MS = 15000;
+
+// Único domínio autorizado a carregar dentro do WebView (inclui subdomínios)
+const ALLOWED_HOST_SUFFIX = 'dikmadigital.com.br';
+
+// Subconjunto dos campos de navegação usados no filtro de origem
+interface NavigationRequest {
+  url: string;
+  isTopFrame?: boolean;
+}
 
 const COLORS = {
   primaryDark: '#272662',
@@ -109,6 +119,41 @@ function MainApp() {
 
     webViewRef.current?.reload();
   }, []);
+
+  const isAllowedOrigin = useCallback((url: string): boolean => {
+    try {
+      const { protocol, hostname } = new URL(url);
+
+      return (
+        protocol === 'https:' &&
+        (hostname === ALLOWED_HOST_SUFFIX ||
+          hostname.endsWith(`.${ALLOWED_HOST_SUFFIX}`))
+      );
+    } catch {
+      return false;
+    }
+  }, []);
+
+  const handleShouldStartLoad = useCallback(
+    (request: NavigationRequest): boolean => {
+      // Embeds/iframes não são navegação principal — permite renderizar
+      if (request.isTopFrame === false) {
+        return true;
+      }
+
+      if (isAllowedOrigin(request.url)) {
+        return true;
+      }
+
+      // Qualquer outro destino abre no navegador do dispositivo
+      void Linking.openURL(request.url).catch(() => {
+        // Falha ao abrir navegador externo: apenas bloqueia a navegação
+      });
+
+      return false;
+    },
+    [isAllowedOrigin]
+  );
 
   const renderPermissionScreen = (
     message: string,
@@ -198,15 +243,12 @@ function MainApp() {
             style={styles.webview}
             javaScriptEnabled
             domStorageEnabled
-            allowFileAccess
-            allowFileAccessFromFileURLs
-            allowUniversalAccessFromFileURLs
             mediaPlaybackRequiresUserAction={false}
-            mixedContentMode="always"
             androidLayerType="hardware"
             allowsInlineMediaPlayback
-            mediaCapturePermissionGrantType="grant"
-            webviewDebuggingEnabled
+            mediaCapturePermissionGrantType="prompt"
+            webviewDebuggingEnabled={__DEV__}
+            onShouldStartLoadWithRequest={handleShouldStartLoad}
             startInLoadingState
             renderLoading={() => (
               <View style={styles.loadingContainer}>

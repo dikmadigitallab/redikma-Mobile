@@ -33,6 +33,13 @@ yarn-error.*
 # local env files
 .env*.local
 .env
+
+# Firebase / Google Services (por ambiente, nunca versionar)
+google-services.json
+
+# Configuração local do OpenCode
+.opencode/
+opencode.json
 # typescript
 *.tsbuildinfo
 
